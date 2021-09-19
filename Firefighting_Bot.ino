@@ -11,9 +11,8 @@ float x=0;
 
 void loop()
 {
-x=0.5analogRead(A0) + 0.5x;
+x=0.5*analogRead(A0) + 0.5*x;
 Serial.println(x);
-}
 
 if(x<300)
 alarm();
