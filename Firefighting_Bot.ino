@@ -1,6 +1,10 @@
 void setup()
 {
 Serial.begin(9600);
+
+pinMode(3, OUTPUT);
+pinMode(5, OUTPUT);
+
 pinMode(A0, INPUT_PULLUP);
 }
 float x=0;
@@ -14,6 +18,11 @@ Serial.println(x);
 if(x<300)
 alarm();
 
+else
+{
+digitalWrite(3, LOW);
+digitalWrite(5, LOW);
+}
 
 }
 
