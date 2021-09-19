@@ -2,20 +2,29 @@ void setup()
 {
 Serial.begin(9600);
 
-pinMode(3, OUTPUT);
-pinMode(5, OUTPUT);
-
+DDRB|=0xff;
+PORTB=0x00;
+  
 pinMode(A0, INPUT_PULLUP);
 }
 
 float x=0;
+int x[4], y[4];
+int n=4;
 
 void loop()
 {
 x=0.5*analogRead(A0) + 0.5*x;
 Serial.println(x);
 
-if(x<300)
+for(byte addr=0;addr<7;addr++)
+{
+  PORTB=addr;
+  x[addr]=analogRead(A0);
+  y[addr]=analogRead(A0)&(addr&2|addr&3|addr&4|addr&5);
+}
+  centroid();
+if(cx&&cy<300)
 alarm();
 
 else
@@ -42,8 +51,7 @@ analogWrite(5, i);
 
 }
 
-int x[4], y[4];
-int n=4;
+
 
 void centroid()
 {
